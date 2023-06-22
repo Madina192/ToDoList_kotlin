@@ -5,13 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.todolist.data.local.Pref
 import com.example.todolist.databinding.FragmentOnBoardingBinding
 import com.example.todolist.ui.onboarding.adapter.OnBoardingAdapter
 
 class OnBoardingFragment : Fragment() {
 
     private lateinit var binding : FragmentOnBoardingBinding
-    private val adapter = OnBoardingAdapter()
+    private val adapter = OnBoardingAdapter(this::onNextClick)
+    private val pref : Pref by lazy {
+        Pref(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,5 +30,10 @@ class OnBoardingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewPager.adapter = adapter
+    }
+
+    private fun onNextClick() {
+        pref.saveUserSeen()
+        findNavController().navigateUp()
     }
 }
