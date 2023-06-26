@@ -1,4 +1,4 @@
-package com.example.todolist.ui.tasks
+package com.example.todolist.ui.task
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.todolist.databinding.FragmentTasksBinding
 
-class TasksFragment : Fragment() {
+class TaskFragment : Fragment() {
 
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!

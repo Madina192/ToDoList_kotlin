@@ -30,7 +30,7 @@
             android:id="@+id/etName"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Enter your name"
+            android:hint="@string/enter_your_name"
             android:background="@null"
             android:textSize="20sp"
             android:textColor="@color/black"
@@ -40,7 +40,7 @@
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="save"
+            android:text="@string/save"
             />
     </LinearLayout>
 

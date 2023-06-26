@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToOnBoarding() {
-        //if (!pref.isUserSeen()) {
+        if (!pref.isUserSeen()) {
             navController.navigate(R.id.onBoardingFragment)
-        //}
+        }
     }
 
     private fun setBottomNavVisibility(){
