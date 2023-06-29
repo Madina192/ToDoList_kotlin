@@ -13,6 +13,8 @@ class AddTaskFragment : Fragment() {
 
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
+    private lateinit var data : Task
+    private var task : Task? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,8 +33,25 @@ class AddTaskFragment : Fragment() {
 
     private fun handleClick(){
         binding.btnSaveTask.setOnClickListener{
+            data = Task(
+                title = binding.etTitle.text.toString(),
+                desc = binding.etDesc.text.toString(),
+            )
+            if (task != null) {
+                updateTask()
+            } else {
+                saveTask()
+            }
             findNavController().navigateUp()
         }
+    }
+
+    private fun saveTask() {
+        TODO("Not yet implemented")
+    }
+
+    private fun updateTask() {
+        TODO("Not yet implemented")
     }
 
     override fun onDestroyView() {
