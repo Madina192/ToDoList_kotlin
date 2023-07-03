@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.todolist.databinding.ItemTaskBinding
 import com.example.todolist.model.Task
 
-class TaskAdapter(val onClick : (Task) -> Unit) : Adapter<TaskAdapter.TaskViewHolder>(){
+class TaskAdapter(val onClick : (Task) -> Unit, val onLongClick : (Task) -> Unit) : Adapter<TaskAdapter.TaskViewHolder>(){
 
     private val list = arrayListOf<Task>()
 
@@ -36,6 +36,11 @@ class TaskAdapter(val onClick : (Task) -> Unit) : Adapter<TaskAdapter.TaskViewHo
 
             itemView.setOnClickListener {
                 onClick(task)
+            }
+
+            itemView.setOnLongClickListener{
+                onLongClick(task)
+                false
             }
 
         }

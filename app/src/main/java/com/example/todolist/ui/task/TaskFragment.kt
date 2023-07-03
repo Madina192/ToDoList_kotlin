@@ -1,5 +1,6 @@
 package com.example.todolist.ui.task
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ class TaskFragment : Fragment() {
 
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
-    private val adapter = TaskAdapter(this::onClick)
+    private val adapter = TaskAdapter(this::onClick, this::onLongClick)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,14 +33,8 @@ class TaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         addTasks()
-        navigateToAddTaskFragment()
 
         binding.recyclerView.adapter = adapter
-
-    }
-
-    private fun navigateToAddTaskFragment() {
-
     }
 
     private fun addTasks() {
@@ -49,6 +44,22 @@ class TaskFragment : Fragment() {
 
     private fun onClick(task: Task) {
         findNavController().navigate(R.id.navigation_add, bundleOf(TASK_KEY to task))
+    }
+
+    private fun onLongClick(task: Task) {
+        App.db.taskDao().delete(task)
+        val alertDialogDelete = AlertDialog.Builder(requireContext())
+        alertDialogDelete.setMessage("Are you sure to delete this task?")
+
+        alertDialogDelete.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            App.db.taskDao().delete(task)
+            addTasks()
+        }
+
+        alertDialogDelete.setNegativeButton(getString(R.string.no)) { dialog, _ ->
+            dialog?.cancel()
+        }
+        alertDialogDelete.create().show()
     }
 
     override fun onDestroyView() {
